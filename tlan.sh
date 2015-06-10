@@ -57,9 +57,13 @@ set -x
 # no args means we want the host, otherwise add the host link
 #
 #
-([[ $# = 0 ]] && (name=${prefix}.${master_hostname})) || \
-  linking="--link ${prefix}.${master_hostname}:${master_hostname}" && \
-  name=${1}
+
+name=${master_hostname}
+[[ -n ${1} && ${1} != ${master_hostname} ]] && (linking="--link ${prefix}.${master_hostname}:${master_hostname}" && name=${1} )
+#(([[ $# == 0 ]] || [[ ${1} == "${master_hostname}" ]] ) && \
+#  name=${prefix}.${master_hostname}) || \
+#    (linking="--link ${prefix}.${master_hostname}:${master_hostname}" && \
+#    name=${1})
 
 
 ##
